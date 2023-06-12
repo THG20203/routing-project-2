@@ -28,13 +28,19 @@ import NewEventPage from "./pages/NewEvent";
 
 //create router
 const router = createBrowserRouter([
-  // root route, element is the homepage
-  { path: "/", element: <HomePage /> },
-  { path: "/events", element: <EventsPage /> },
-  { path: "/events/:eventId", element: <EventDetailPage /> },
-  { path: "/events/new", element: <NewEventPage /> },
-  // can have a hard coded segment after a dynamic segment
-  { path: "/events/:eventId/edit", element: <EditEventPage /> },
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      // root route, element is the homepage
+      { path: "/", element: <HomePage /> },
+      { path: "/events", element: <EventsPage /> },
+      { path: "/events/:eventId", element: <EventDetailPage /> },
+      { path: "/events/new", element: <NewEventPage /> },
+      // can have a hard coded segment after a dynamic segment
+      { path: "/events/:eventId/edit", element: <EditEventPage /> },
+    ],
+  },
 ]);
 
 function App() {
