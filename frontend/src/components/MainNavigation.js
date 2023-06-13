@@ -16,6 +16,7 @@ function MainNavigation() {
               classname={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
+              end
             >
               Home
             </NavLink>
