@@ -24,7 +24,8 @@ import RootLayout from "./pages/Root";
 import EventsRootLayout from "./pages/EventsRoot";
 import EditEventPage from "./pages/EditEvent";
 import EventDetailPage from "./pages/EventDetail";
-import EventsPage from "./pages/Events";
+// importing page & loader function
+import EventsPage, { loader as eventsLoader } from "./pages/Events";
 import HomePage from "./pages/Home";
 import NewEventPage from "./pages/NewEvent";
 
@@ -46,18 +47,8 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <EventsPage />,
-            loader: async () => {
-              // sends https request to dummy backend API
-              const response = await fetch("http://localhost:8080/events");
-              // error stored if invalid response
-              if (!response.ok) {
-              } else {
-                const resData = await response.json();
-                /* get data into events page -> make it available as well as any other components 
-                where you need it */
-                return resData.events;
-              }
-            },
+            // useEventsLoader pointer from imports above
+            loader: eventsLoader,
           },
           { path: ":eventId", element: <EventDetailPage /> },
           { path: "new", element: <NewEventPage /> },

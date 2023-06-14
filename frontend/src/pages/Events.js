@@ -17,3 +17,17 @@ function EventsPage() {
 }
 
 export default EventsPage;
+
+// export loader -> although name is up to me
+export async function loader() {
+  // sends https request to dummy backend API
+  const response = await fetch("http://localhost:8080/events");
+  // error stored if invalid response
+  if (!response.ok) {
+  } else {
+    const resData = await response.json();
+    /* get data into events page -> make it available as well as any other components 
+    where you need it */
+    return resData.events;
+  }
+}
