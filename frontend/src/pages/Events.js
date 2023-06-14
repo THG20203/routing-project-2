@@ -10,17 +10,7 @@ function EventsPage() {
   useEffect(() => {
     async function fetchEvents() {
       setIsLoading(true);
-      // sends https request to dummy backend API
-      const response = await fetch("http://localhost:8080/events");
 
-      // error stored if invalid response
-      if (!response.ok) {
-        setError("Fetching events failed.");
-      } else {
-        // if no error extract the data from the response -> store that with the help of state
-        const resData = await response.json();
-        setFetchedEvents(resData.events);
-      }
       setIsLoading(false);
     }
 

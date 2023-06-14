@@ -40,7 +40,25 @@ const router = createBrowserRouter([
         path: "events",
         element: <EventsRootLayout />,
         children: [
-          { index: true, element: <EventsPage /> },
+          /* in route definition, can add extra property - loader property. This property wants 
+          a function as a value. A function or an error function. This function will be executed by
+          react router whenever you're about to visit this route. */
+          {
+            index: true,
+            element: <EventsPage />,
+            loader: async () => {
+              // sends https request to dummy backend API
+              const response = await fetch("http://localhost:8080/events");
+              // error stored if invalid response
+              if (!response.ok) {
+              } else {
+                const resData = await response.json();
+                /* get data into events page -> make it available as well as any other components 
+                where you need it */
+                return resData.events;
+              }
+            },
+          },
           { path: ":eventId", element: <EventDetailPage /> },
           { path: "new", element: <NewEventPage /> },
           // can have a hard coded segment after a dynamic segment
