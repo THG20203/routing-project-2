@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
       /* moved res.json code into the timeout call back function to ensure the response
       is only sent back from the backend to the front end after 1.5 seconds */
       res.json({ events: events });
-    }, 1);
+    }, 200);
   } catch (error) {
     next(error);
   }
