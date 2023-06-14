@@ -12,11 +12,7 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     const events = await getAll();
-    setTimeout(() => {
-      /* moved res.json code into the timeout call back function to ensure the response
-      is only sent back from the backend to the front end after 1.5 seconds */
-      res.json({ events: events });
-    }, 200);
+    res.json({ events: events });
   } catch (error) {
     next(error);
   }
