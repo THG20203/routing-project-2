@@ -9,7 +9,6 @@ function RootLayout() {
     <>
       <MainNavigation />
       <main>
-        #
         <Outlet />
       </main>
     </>

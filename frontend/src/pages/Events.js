@@ -5,7 +5,8 @@ import EventsList from "../components/EventsList";
 function EventsPage() {
   /* How do we now get access to that data that is returned by our loader? First
   above importing useLoaderData */
-  const events = useLoaderData();
+  const data = useLoaderData();
+  const events = data.events;
 
   return (
     <>
@@ -21,7 +22,7 @@ export default EventsPage;
 // export loader -> although name is up to me
 export async function loader() {
   // sends https request to dummy backend API
-  const response = await fetch("http://localhost:8000/events");
+  const response = await fetch("http://localhost:3000/events");
   // error stored if invalid response
   if (!response.ok) {
   } else {
