@@ -8,12 +8,9 @@ function MainNavigation() {
       <nav>
         <ul className={classes.list}>
           <li>
-            {/* using absolute path  - always want to go to home page. Navlink recieves a 
-            function that gets an object, automatically provided by react router, where we 
-            can get the is active class. */}
             <NavLink
               to="/"
-              classname={({ isActive }) =>
+              className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
               end
@@ -24,7 +21,7 @@ function MainNavigation() {
           <li>
             <NavLink
               to="/events"
-              classname={({ isActive }) =>
+              className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
             >
