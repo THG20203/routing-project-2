@@ -12,7 +12,6 @@ function EventsList({ events }) {
       <ul className={classes.list}>
         {events.map((event) => (
           <li key={event.id} className={classes.item}>
-            {/* below relative path, relative to currently active route */}
             <Link to={event.id}>
               <img src={event.image} alt={event.title} />
               <div className={classes.content}>
