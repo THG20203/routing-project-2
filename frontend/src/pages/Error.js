@@ -10,6 +10,9 @@ function ErrorPage() {
   let message = "Something went wrong!";
 
   if (error.status === 500) {
+    // if error status 500, keep title, but set message to error error.data.message
+    /* error.data gives us access to the data thats included in the error response in 
+    events.js, then its message property with the .message */
     message = error.data.message;
   }
 
