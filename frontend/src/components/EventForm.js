@@ -18,7 +18,7 @@ function EventForm({ method, event }) {
           type="text"
           name="title"
           required
-          {/* check if have an event -> if yes populate the title, otherwise set to an empty string */}
+          /* check if have an event -> if yes populate the title, otherwise set to an empty string */
           defaultValue={event ? event.title : ""}
         />
       </p>
