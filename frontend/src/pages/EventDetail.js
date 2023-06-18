@@ -1,8 +1,11 @@
+/* useRouteLoaderData -> works almost like useLoaderData, but it takes a route id as an argument */
 import { useRouteLoaderData, json } from "react-router-dom";
 
 import EventItem from "../components/EventItem";
 
 function EventDetailPage() {
+  /* useRouteLoaderData taking a route id as an argument 'event-detail'. Event-detail is the id 
+  assigned to the route :eventId in the app.js */
   const data = useRouteLoaderData("event-detail");
 
   return <EventItem event={data.event} />;
