@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import classes from "./EventForm.module.css";
 
+// accept an event prop with second parameter 'event'
 function EventForm({ method, event }) {
   const navigate = useNavigate();
   function cancelHandler() {
@@ -17,6 +18,7 @@ function EventForm({ method, event }) {
           type="text"
           name="title"
           required
+          {/* check if have an event -> if yes populate the title, otherwise set to an empty string */}
           defaultValue={event ? event.title : ""}
         />
       </p>
