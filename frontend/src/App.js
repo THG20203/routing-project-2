@@ -8,7 +8,7 @@ import EventDetailPage, {
 import EventsPage, { loader as eventsLoader } from "./pages/Events";
 import EventsRootLayout from "./pages/EventsRoot";
 import HomePage from "./pages/Home";
-import NewEventPage from "./pages/NewEvent";
+import NewEventPage, { action as newEventAction } from "./pages/NewEvent";
 import RootLayout from "./pages/Root";
 
 const router = createBrowserRouter([
@@ -46,7 +46,12 @@ const router = createBrowserRouter([
               { path: "edit", element: <EditEventPage /> },
             ],
           },
-          { path: "new", element: <NewEventPage /> },
+          /* to add an action to the new route, we add a special action property. Just like loader,
+          action wants a function. */
+          /* But like loaders, want to keep it away from route definitions in the 
+          app.js, and close to the code definition files where it belongs, so in this case in 
+          NewEvent.js file */
+          { path: "new", element: <NewEventPage />, action: newEventAction },
         ],
       },
     ],
