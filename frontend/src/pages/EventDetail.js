@@ -14,14 +14,16 @@ function EventDetailPage() {
 export default EventDetailPage;
 
 /* exporting as an aysync function because I want to use the await keyword */
-export async function loader({ request, params }) {
+export async function loader({ params, request }) {
   const id = params.eventId;
 
   /* with fetch, send request to dummy backend api, which I can reach with https://localhost:8080/events/ */
   /* + id means plus the id of the event for which we want to fetch the details */
   /* Then get a response by awaiting - react router automatically awaits the promise and gives us access 
   to the data to which it resolves. */
-  const response = await fetch("http://localhost:8080/events/" + id);
+  const response = await fetch("http://localhost:8080/events/" + eventId, {
+    method: request.method,
+  });
 
   if (!response.ok) {
     throw json(
