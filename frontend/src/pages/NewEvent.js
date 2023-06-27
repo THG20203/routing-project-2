@@ -29,6 +29,11 @@ export async function action({ request, params }) {
     body: JSON.stringify(eventData),
   });
 
+  if (response.status === 422) {
+    // if 422 status code is present, want to return a response
+    return response;
+  }
+
   if (!response.ok) {
     throw json({ message: "Could not save event" }, { status: 500 });
   }
