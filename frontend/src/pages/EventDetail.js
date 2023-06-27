@@ -1,5 +1,5 @@
 /* useRouteLoaderData -> works almost like useLoaderData, but it takes a route id as an argument */
-import { useRouteLoaderData, json } from "react-router-dom";
+import { useRouteLoaderData, json, redirect } from "react-router-dom";
 
 import EventItem from "../components/EventItem";
 
@@ -34,4 +34,19 @@ export async function loader({ request, params }) {
     /* Only if thats not the case, if we have a successful response, I want to return the response */
     return response;
   }
+}
+
+export async function action({ params }) {
+  const eventId = params.eventId;
+  // deleting an event
+  const response = await fetch("https://localhost:8080/events/" + eventId);
+  if (!response.ok) {
+    throw json(
+      { message: "Could not delete event." },
+      {
+        status: 500,
+      }
+    );
+  }
+  return redirect("/events");
 }
