@@ -4,6 +4,15 @@ import classes from "./NewsletterSignup.module.css";
 
 function NewsletterSignup() {
   const fetcher = useFetcher();
+  const { data, state } = fetcher;
+
+  useEffect(() => {
+    if (state === "idle" && data && data.message) {
+      window.alert("Signup successful!");
+    }
+  }, [data, state]);
+
+  state === "";
 
   return (
     <fetcher.Form
