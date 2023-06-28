@@ -1,5 +1,5 @@
 /* useRouteLoaderData -> works almost like useLoaderData, but it takes a route id as an argument */
-import { useRouteLoaderData, json, redirect } from "react-router-dom";
+import { useRouteLoaderData, json, redirect, defer } from "react-router-dom";
 
 import EventItem from "../components/EventItem";
 
@@ -58,7 +58,10 @@ if (!response.ok) {
 export async function loader({ params, request }) {
   const id = params.eventId;
 
-  return defer()
+  return defer({
+    event: loadEvent(id),
+    events: loadEvents()
+  })
 }
 
 export async function action({ params }) {
