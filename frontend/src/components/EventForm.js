@@ -84,6 +84,7 @@ function EventForm({ method, event }) {
 export default EventForm;
 
 export async function action({ request, params }) {
+  const method = request.method;
   const data = await request.formData();
   const eventData = {
     title: data.get("title"),
@@ -96,8 +97,16 @@ export async function action({ request, params }) {
   listens on port 8080/events */
   /* also want to send a post request, and add some data to the request. Data that I want to send 
   is data submitted with the form. On form all inputs should have name attribute */
+
+  let url = "http://localhost:8080/events";
+
+  if (method === "patch") {
+    const eventId = params.eventId;
+    url = "http://localhost:8080/events/" + eventId;
+  }
+
   const response = fetch("https://localhost:8080/events", {
-    method: "POST",
+    method: method,
     headers: {
       "Content-Type": "application/json",
     },
