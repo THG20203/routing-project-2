@@ -12,6 +12,7 @@ import HomePage from "./pages/Home";
 import NewEventPage from "./pages/NewEvent";
 import RootLayout from "./pages/Root";
 import { action as manipulateEventAction } from "./components/EventForm";
+import NewsletterPage, { action as newsletterAction } from "./pages/Newsletter";
 
 const router = createBrowserRouter([
   {
@@ -32,14 +33,7 @@ const router = createBrowserRouter([
           {
             path: ":eventId",
             id: "event-detail",
-            /* eventDetailLoader removed from the eventDetailPage router- added to wrapper route
-            so can use nested routes feature not just to use a wrapper layout component to use a 
-            shared loader */
-            /* as learned before, can access loader data with use loader with special hook provided 
-            by react router in any component thats on the same level or a lower level than the route 
-            where the loader is added. */
             loader: eventDetailLoader,
-            // constructing nested routes, with parent route url and child route urls
             children: [
               {
                 index: true,
@@ -53,17 +47,17 @@ const router = createBrowserRouter([
               },
             ],
           },
-          /* to add an action to the new route, we add a special action property. Just like loader,
-          action wants a function. */
-          /* But like loaders, want to keep it away from route definitions in the 
-          app.js, and close to the code definition files where it belongs, so in this case in 
-          NewEvent.js file */
           {
             path: "new",
             element: <NewEventPage />,
             action: manipulateEventAction,
           },
         ],
+      },
+      {
+        path: "newsletter",
+        element: <NewsletterPage />,
+        action: newsletterAction,
       },
     ],
   },
