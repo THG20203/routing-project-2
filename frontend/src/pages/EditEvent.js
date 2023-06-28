@@ -7,7 +7,7 @@ function EditEventPage() {
   {
     /* Event form should be pre populated with the data for the event, which we're trying to edit. */
   }
-  return <EventForm event={data.event} />;
+  return <EventForm method="patch" event={data.event} />;
 }
 
 export default EditEventPage;
