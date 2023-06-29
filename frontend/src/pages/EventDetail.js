@@ -1,17 +1,32 @@
+import { Suspense } from "react";
 /* useRouteLoaderData -> works almost like useLoaderData, but it takes a route id as an argument */
-import { useRouteLoaderData, json, redirect, defer } from "react-router-dom";
+import {
+  useRouteLoaderData,
+  json,
+  redirect,
+  defer,
+  Await,
+} from "react-router-dom";
 
 import EventItem from "../components/EventItem";
 
 function EventDetailPage() {
   /* useRouteLoaderData taking a route id as an argument 'event-detail'. Event-detail is the id 
   assigned to the route :eventId in the app.js */
-  const data = useRouteLoaderData("event-detail");
+  const { event, events } = useRouteLoaderData("event-detail");
 
   return (
     <>
-      <EventItem event={data.event} />
-      <EventsList events={} />
+      <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
+        <Await resolve={event}>
+          {(loadedEvent) => <EventItem event={loadedEvent} />}
+        </Await>
+      </Suspense>
+      <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
+        <Await resolve={events}>
+          {(loadedEvents) => <EventItem events={loadedEvents} />}
+        </Await>
+      </Suspense>
     </>
   );
 }
@@ -54,14 +69,13 @@ if (!response.ok) {
   return resData.events;
 }
 
-
 export async function loader({ params, request }) {
   const id = params.eventId;
 
   return defer({
-    event: loadEvent(id),
-    events: loadEvents()
-  })
+    event: await loadEvent(id),
+    events: loadEvents(),
+  });
 }
 
 export async function action({ params }) {
